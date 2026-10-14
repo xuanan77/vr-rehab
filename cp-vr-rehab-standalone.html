@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CP VR Rehab · 脑瘫 VR 康复 · 뇌성마비 VR 재활</title>
+<style>
+:root{--bg:#fff8ee;--card:#fff;--tx:#3a2f4a;--mu:#76698a;--ac:#e0457f;--lk:#c2306b;--bd:#f3e2d3;--ok:#18a075;--g1:#e0457f;--g2:#f0663f;--btx:#fff;--dot:rgba(255,170,120,.28);--c1:#e3f8ef;--c2:#fff2d2;--c3:#e6efff;--h1:#ffd3e4;--h2:#fff0b8;--h3:#cdeeff;--a2:#5ccfb0;--a3:#ffc94d;--a4:#7cb7ff;--a5:#b79cff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1730;--card:#2a2143;--tx:#f6efff;--mu:#bcaed4;--ac:#ff8fb5;--lk:#ffa8c8;--bd:#40346a;--ok:#5fdcae;--g1:#ff8fb5;--g2:#ffb38a;--btx:#2a0f1c;--dot:rgba(183,156,255,.14);--c1:#24433b;--c2:#4a3e1f;--c3:#263a66;--h1:#4b2b66;--h2:#3a3566;--h3:#274a73}}
+:root[data-theme="dark"]{--bg:#1d1730;--card:#2a2143;--tx:#f6efff;--mu:#bcaed4;--ac:#ff8fb5;--lk:#ffa8c8;--bd:#40346a;--ok:#5fdcae;--g1:#ff8fb5;--g2:#ffb38a;--btx:#2a0f1c;--dot:rgba(183,156,255,.14);--c1:#24433b;--c2:#4a3e1f;--c3:#263a66;--h1:#4b2b66;--h2:#3a3566;--h3:#274a73}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(var(--dot) 2.5px,transparent 2.5px);background-size:30px 30px;color:var(--tx);font:16px/1.65 "Fredoka","Nunito","Hiragino Maru Gothic ProN","PingFang SC","Microsoft YaHei","Noto Sans KR","Malgun Gothic",system-ui,sans-serif}
+.bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.bg span{position:absolute;font-size:30px;opacity:.55;animation:fl 9s ease-in-out infinite}
+.bg span:nth-child(1){left:4%;top:30%}.bg span:nth-child(2){right:5%;top:45%;animation-delay:-3s}.bg span:nth-child(3){left:8%;top:72%;animation-delay:-5s}
+.bg span:nth-child(4){right:9%;top:80%;animation-delay:-2s}.bg span:nth-child(5){left:46%;top:92%;animation-delay:-6s}.bg span:nth-child(6){right:30%;top:22%;animation-delay:-4s}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-18px) rotate(6deg)}}
+@media(prefers-reduced-motion:reduce){.bg span{animation:none}}
+.hero{position:relative;overflow:hidden;z-index:1;background:linear-gradient(120deg,var(--h1),var(--h2) 55%,var(--h3));border-radius:0 0 32px 32px;padding:20px 16px 30px;box-shadow:0 6px 0 var(--bd)}
+.hin{position:relative;z-index:2;max-width:900px;margin:0 auto;display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.art{position:absolute;right:2px;bottom:0;width:min(46%,320px);height:auto;z-index:1;opacity:.95}
+@media(max-width:560px){.art{width:44%;opacity:.6}}
+h1{font-size:1.55rem;line-height:1.3;margin:0;max-width:20em}h2{font-size:1.15rem;margin:0 0 10px}
+.sub{margin:6px 0 0;font-size:.92rem;max-width:26em}
+select,input[type=text]{font:inherit;color:var(--tx);background:var(--card);border:2px solid var(--bd);border-radius:14px;padding:7px 10px;max-width:100%}
+#lang{border-color:var(--a5);font-weight:600}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;padding-top:10px}
+nav div{max-width:900px;margin:0 auto;display:flex;gap:8px;padding:6px 12px;overflow-x:auto}
+nav button{flex:none;font:inherit;font-weight:600;border:2px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 16px;border-radius:999px;cursor:pointer;box-shadow:0 3px 0 var(--bd)}
+nav button.on{background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--btx);border-color:transparent}
+[data-tab=home]::before{content:"🏠 "}[data-tab=design]::before{content:"🎨 "}[data-tab=play]::before{content:"📷 "}[data-tab=app]::before{content:"🚀 "}
+main{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:12px 12px 48px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:2px solid var(--bd);border-top:7px solid var(--a2);border-radius:22px;padding:14px 18px 10px;margin-bottom:16px;box-shadow:0 6px 0 var(--bd)}
+section .card:nth-child(2n){border-top-color:var(--a3)}section .card:nth-child(3n){border-top-color:var(--a4)}section .card:nth-child(4n){border-top-color:var(--a5)}
+.card p{margin:8px 0}
+#home .card:nth-child(1) h2::before{content:"🌈 "}#home .card:nth-child(2) h2::before{content:"✨ "}#plan h2::before{content:"🎯 "}#res h2::before{content:"🏆 "}#app h2::before{content:"🚀 "}
+#home .card:nth-child(1) p:nth-of-type(-n+3){border-radius:16px;padding:8px 12px}
+#home .card:nth-child(1) p:nth-of-type(1){background:var(--c1)}#home .card:nth-child(1) p:nth-of-type(2){background:var(--c2)}#home .card:nth-child(1) p:nth-of-type(3){background:var(--c3)}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+label{display:block;font-size:.9rem;color:var(--mu);margin-bottom:12px;font-weight:600}
+label select,label input[type=text],label input[type=range]{display:block;width:100%;margin-top:5px}
+input[type=range],input[type=checkbox]{accent-color:var(--ac)}
+.chk{display:flex;gap:8px;align-items:center;color:var(--tx)}
+.chk input{width:20px;height:20px}
+.btn{font:inherit;font-weight:600;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--btx);border:0;border-radius:999px;padding:11px 20px;cursor:pointer;margin:0 8px 10px 0;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.18)}
+.btn.alt{background:var(--card);color:var(--lk);border:2px solid var(--ac);box-shadow:0 4px 0 var(--bd)}
+.btn:disabled{opacity:.45;cursor:default}
+.mu{color:var(--mu);font-size:.85rem}
+a{color:var(--lk)}
+.stage{position:relative;width:100%;max-width:640px;margin:0 auto 8px;aspect-ratio:4/3;background:#000;border-radius:26px;overflow:hidden;border:6px solid var(--a3);box-shadow:0 0 0 4px var(--a5),0 8px 0 4px var(--bd)}
+.stage canvas{width:100%;height:100%;display:block}
+video.hid{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+#pv{width:100%;max-width:640px;border-radius:18px;margin-top:8px;display:none}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0}
+.stats div{flex:1;min-width:90px;text-align:center;border-radius:16px;padding:8px 6px;background:var(--c1)}
+.stats div:nth-child(2){background:var(--c2)}.stats div:nth-child(3){background:var(--c3)}.stats div:nth-child(4){background:var(--h1)}
+.stats b{font-size:1.5rem;display:block;color:var(--lk)}
+ol{padding-left:0;list-style:none;counter-reset:s}
+li{counter-increment:s;margin-bottom:10px;padding:8px 12px 8px 46px;position:relative;border-radius:16px;background:var(--c1)}
+li:nth-child(2n){background:var(--c2)}li:nth-child(3n){background:var(--c3)}
+li::before{content:counter(s);position:absolute;left:10px;top:8px;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--g1),var(--g2));color:var(--btx);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+</style></head><body>
+<div class="bg" aria-hidden="true"><span>🎈</span><span>⭐</span><span>☁️</span><span>🦋</span><span>🌈</span><span>🐥</span></div>
+<header class="hero"><div class="hin">
+ <div><h1 data-i="title"></h1><p class="sub" data-i="sub"></p></div>
+ <select id="lang" aria-label="Language"><option value="0">中文</option><option value="1">English</option><option value="2">한국어</option></select>
+</div>
+<svg class="art" viewBox="0 0 320 170" aria-hidden="true">
+ <g fill="#fff" opacity=".92"><ellipse cx="60" cy="150" rx="46" ry="16"/><ellipse cx="92" cy="140" rx="32" ry="18"/><ellipse cx="258" cy="156" rx="50" ry="15"/><ellipse cx="290" cy="144" rx="28" ry="15"/></g>
+ <g fill="#ffc94d"><polygon transform="translate(38,40) scale(1.2)" points="0,-12 3.5,-4 12,-3.5 5.5,2 7.5,10.5 0,6 -7.5,10.5 -5.5,2 -12,-3.5 -3.5,-4"/><polygon transform="translate(300,28)" points="0,-12 3.5,-4 12,-3.5 5.5,2 7.5,10.5 0,6 -7.5,10.5 -5.5,2 -12,-3.5 -3.5,-4"/><polygon transform="translate(205,22) scale(.7)" points="0,-12 3.5,-4 12,-3.5 5.5,2 7.5,10.5 0,6 -7.5,10.5 -5.5,2 -12,-3.5 -3.5,-4"/></g>
+ <g stroke="#b79cff" stroke-width="2" fill="none"><path d="M120 98q-6 30 4 62"/><path d="M185 82q6 30-2 70"/><path d="M243 100q-4 24 2 52"/></g>
+ <ellipse cx="120" cy="66" rx="27" ry="33" fill="#ff7aa8"/><path d="M115 98l5 7 5-7z" fill="#ff7aa8"/><ellipse cx="109" cy="52" rx="6" ry="9" fill="#fff" opacity=".5"/>
+ <circle cx="112" cy="70" r="2.6" fill="#3a2f4a"/><circle cx="128" cy="70" r="2.6" fill="#3a2f4a"/><path d="M113 78q7 7 14 0" stroke="#3a2f4a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+ <ellipse cx="185" cy="50" rx="24" ry="30" fill="#5ccfb0"/><path d="M180 80l5 7 5-7z" fill="#5ccfb0"/><ellipse cx="176" cy="38" rx="5" ry="8" fill="#fff" opacity=".5"/>
+ <circle cx="178" cy="54" r="2.4" fill="#3a2f4a"/><circle cx="192" cy="54" r="2.4" fill="#3a2f4a"/><path d="M179 61q6 6 12 0" stroke="#3a2f4a" stroke-width="2" fill="none" stroke-linecap="round"/>
+ <ellipse cx="243" cy="76" rx="20" ry="25" fill="#ffc94d"/><path d="M239 100l4 6 4-6z" fill="#ffc94d"/><ellipse cx="236" cy="66" rx="4" ry="7" fill="#fff" opacity=".55"/>
+ <circle cx="237" cy="79" r="2" fill="#3a2f4a"/><circle cx="249" cy="79" r="2" fill="#3a2f4a"/><path d="M238 85q5 5 10 0" stroke="#3a2f4a" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>
+</header>
+<nav><div id="tabs">
+ <button data-tab="home" data-i="nHome"></button><button data-tab="design" data-i="nDesign"></button>
+ <button data-tab="play" data-i="nPlay"></button><button data-tab="app" data-i="nApp"></button>
+</div></nav>
+<main>
+<section id="home">
+ <div class="card"><h2 data-i="evT"></h2>
+  <p data-i="ev1"></p><p data-i="ev2"></p><p data-i="ev3"></p>
+  <p class="mu"><a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1483370/pdf" target="_blank" rel="noopener">Frontiers in Psychology 2025</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10875340" target="_blank" rel="noopener">PMC10875340</a> · <a href="https://turkarchpediatr.org/index.php/pub/article/view/1907" target="_blank" rel="noopener">Turk Arch Pediatr</a></p></div>
+ <div class="card"><h2 data-i="howT"></h2><p data-i="how"></p>
+  <button class="btn" data-go="design" data-i="nDesign"></button><button class="btn alt" data-go="play" data-i="nPlay"></button></div>
+ <p class="mu" data-i="disc"></p>
+</section>
+
+<section id="design">
+ <div class="card"><div class="row">
+  <div>
+   <label><span data-i="dName"></span><input type="text" id="fName" maxlength="40"></label>
+   <label><span data-i="dGoal"></span><select id="fGoal"><option value="0" data-i="g1"></option><option value="1" data-i="g2"></option><option value="2" data-i="g3"></option></select></label>
+   <label><span data-i="dTheme"></span><select id="fTheme"><option value="0" data-i="th1"></option><option value="1" data-i="th2"></option><option value="2" data-i="th3"></option></select></label>
+   <label><span data-i="dSide"></span><select id="fSide"><option value="0" data-i="s1"></option><option value="1" data-i="s2"></option><option value="2" data-i="s3"></option></select></label>
+  </div>
+  <div>
+   <label><span data-i="dDiff"></span> <b id="vDiff"></b><input type="range" id="fDiff" min="1" max="5" step="1"></label>
+   <label><span data-i="dSize"></span> <b id="vSize"></b><input type="range" id="fSize" min="30" max="80" step="5"></label>
+   <label><span data-i="dTime"></span><select id="fTime"><option>30</option><option>60</option><option>90</option><option>120</option></select></label>
+   <label class="chk"><input type="checkbox" id="fAdapt"><span data-i="dAdapt"></span></label>
+  </div></div>
+  <button class="btn" id="bGen" data-i="dGen"></button>
+ </div>
+ <div class="card" id="plan" style="display:none"><h2 data-i="planT"></h2><p id="planName"></p><p id="planLine" class="mu"></p><p id="planTip"></p>
+  <button class="btn" data-go="play" data-i="dGo"></button></div>
+</section>
+
+<section id="play">
+ <div class="card">
+  <p data-i="hint"></p>
+  <div class="stage"><canvas id="cv" width="640" height="480"></canvas><video id="vid" class="hid" playsinline muted></video></div>
+  <p class="mu" id="camMsg"></p>
+  <button class="btn" id="bCam" data-i="bCam"></button>
+  <button class="btn" id="bPlay" data-i="bPlay" disabled></button>
+  <label class="chk"><input type="checkbox" id="fRec" checked><span data-i="chkRec"></span></label>
+  <p class="mu" data-i="priv"></p>
+ </div>
+ <div class="card" id="res" style="display:none"><h2 data-i="resT"></h2>
+  <div class="stats"><div><b id="rHit">0</b><span data-i="hitL"></span></div><div><b id="rMiss">0</b><span data-i="missL"></span></div><div><b id="rAcc">0%</b><span data-i="accL"></span></div><div><b id="rLvl">0</b><span data-i="lvlL"></span></div></div>
+  <video id="pv" controls playsinline></video>
+  <p class="mu" id="recMsg"></p>
+  <button class="btn alt" id="bSave" data-i="saveV" style="display:none"></button>
+ </div>
+</section>
+
+<section id="app">
+ <div class="card"><h2 data-i="appT"></h2>
+  <ol><li data-i="a1"></li><li data-i="a2"></li><li data-i="a3"></li><li data-i="a4"></li><li data-i="a5"></li></ol>
+  <p class="mu" data-i="appNote"></p></div>
+</section>
+</main>
+
+<script>
+const S={
+title:["脑瘫儿童 VR/体感游戏康复","VR & Motion-Game Rehab for Cerebral Palsy","뇌성마비 아동 VR·모션게임 재활"],
+sub:["基于证据的科普与互动工具：设计游戏，用摄像头体验动作追踪","Evidence-based explainer and tools: design a game, try camera motion tracking","근거 기반 안내와 도구: 게임을 설계하고 카메라 동작 추적을 체험"],
+nHome:["首页","Home","홈"],nDesign:["设计游戏","Design a game","게임 설계"],nPlay:["摄像头游戏","Camera game","카메라 게임"],nApp:["应用化路线","Go to app","앱 확장"],
+evT:["证据概览","Evidence at a glance","근거 요약"],
+ev1:["2025 年荟萃分析（19 项研究、850 名脑瘫儿童）：VR 运动游戏可提高大运动与精细运动技能。","2025 meta-analysis (19 studies, 850 children with CP): VR motor games improved gross and fine motor skills.","2025년 메타분석(19개 연구, 뇌성마비 아동 850명): VR 모션게임이 대근육·소근육 기능을 향상."],
+ev2:["证据并不一致：另一项荟萃分析认为 VR 改善平衡与运动功能，但对上肢功能无效。","Evidence is mixed: another meta-analysis found benefits for balance and motor function but not upper-limb function.","근거는 일관되지 않음: 다른 메타분석은 균형·운동기능은 개선되나 상지 기능에는 효과가 없다고 보고."],
+ev3:["多数综述认为 VR 更适合作为常规康复的补充，而不是替代。","Most reviews see VR as a complement to, not a replacement for, conventional rehabilitation.","대부분의 문헌은 VR을 기존 재활의 대체가 아닌 보완 수단으로 봄."],
+howT:["这个网站能做什么","What this site does","이 사이트에서 할 수 있는 것"],
+how:["① 设计一个动作游戏（目标、难度、自适应）；② 打开摄像头，用手或身体“碰”目标；③ 录制训练视频并保存。摄像头画面只在本机处理。","1) Design a motion game (goal, difficulty, adaptivity); 2) open the camera and touch targets with your hand or body; 3) record and save the session. Video is processed on your device only.","① 모션 게임 설계(목표, 난이도, 적응형) ② 카메라를 켜고 손이나 몸으로 목표 터치 ③ 세션 녹화·저장. 영상은 기기에서만 처리됩니다."],
+disc:["本站用于课程学习与科普，不构成医疗建议；儿童康复请遵医嘱。","For education only, not medical advice. Follow your clinician's guidance for children.","교육용이며 의료 조언이 아닙니다. 아동 재활은 의료진의 지침을 따르세요."],
+dName:["游戏名称","Game name","게임 이름"],dGoal:["训练目标","Training goal","훈련 목표"],
+g1:["平衡与重心转移","Balance / weight shift","균형·체중 이동"],g2:["上肢够取","Upper-limb reaching","상지 뻗기"],g3:["大运动（全身）","Gross motor (whole body)","대근육(전신)"],
+dTheme:["主题","Theme","테마"],th1:["气球","Balloons","풍선"],th2:["星星","Stars","별"],th3:["水果","Fruit","과일"],
+dSide:["目标出现区域","Target zone","목표 영역"],s1:["全屏","Both sides","양쪽"],s2:["左半屏","Left half","왼쪽"],s3:["右半屏","Right half","오른쪽"],
+dDiff:["难度（1 易 – 5 难）","Difficulty (1 easy – 5 hard)","난이도(1 쉬움 – 5 어려움)"],dSize:["目标大小","Target size","목표 크기"],dTime:["时长（秒）","Duration (s)","시간(초)"],
+dAdapt:["自适应难度：命中率高则升级，低则降级","Adaptive: level up on high hit rate, down on low","적응형: 적중률이 높으면 상향, 낮으면 하향"],
+dGen:["生成设计方案","Generate design plan","설계안 생성"],dGo:["去试玩","Try it","플레이하기"],planT:["设计方案","Design plan","설계안"],
+yes:["是","Yes","예"],no:["否","No","아니오"],
+pl:["难度 {d}/5 · 目标大小 {s} · {t} 秒 · 自适应：{a}","Difficulty {d}/5 · size {s} · {t}s · adaptive: {a}","난이도 {d}/5 · 크기 {s} · {t}초 · 적응형: {a}"],
+tip0:["让目标交替出现在两侧，鼓励重心转移；请在治疗师指导下坐位或站位进行。","Targets on both sides prompt weight shift; use seated or standing as advised by a therapist.","좌우에 목표를 두어 체중 이동을 유도하고, 치료사 지침에 따라 앉거나 서서 진행."],
+tip1:["把目标放在较弱一侧，练习够取与伸手；留意代偿动作。","Place targets on the weaker side to practise reaching; watch for compensatory movements.","약한 쪽에 목표를 두어 뻗기를 연습하고 보상 동작에 주의."],
+tip2:["使用较大的目标和较长停留时间，鼓励全身移动；留出安全空间。","Use larger targets and longer dwell time to encourage whole-body movement; keep the space safe.","큰 목표와 긴 유지 시간으로 전신 움직임을 유도하고 안전한 공간을 확보."],
+hint:["站在摄像头前，用手或身体“碰”目标即可得分。","Stand in front of the camera and touch targets with your hand or body to score.","카메라 앞에서 손이나 몸으로 목표를 터치하면 점수를 얻습니다."],
+bCam:["开启摄像头","Start camera","카메라 켜기"],bPlay:["开始游戏","Start game","게임 시작"],chkRec:["同时录制训练视频","Record the session","세션 녹화"],
+priv:["画面只在你的设备上处理，不会上传。儿童使用请有成人陪同。","Video stays on your device and is never uploaded. Children need adult supervision.","영상은 기기에서만 처리되며 업로드되지 않습니다. 아동은 성인 동반이 필요합니다."],
+camErr:["无法打开摄像头：请允许权限，或在浏览器/应用中直接打开本页。","Cannot open the camera: allow permission or open this page directly in your browser/app.","카메라를 열 수 없습니다. 권한을 허용하거나 브라우저/앱에서 직접 여세요."],
+resT:["训练结果","Session result","훈련 결과"],hitL:["命中","Hits","적중"],missL:["错过","Misses","놓침"],accL:["命中率","Accuracy","적중률"],lvlL:["最终等级","Final level","최종 레벨"],tL:["剩余","Left","남은"],
+saveV:["保存视频","Save video","영상 저장"],noRec:["此浏览器不支持录制，仅显示成绩。","Recording is not supported in this browser; showing scores only.","이 브라우저는 녹화를 지원하지 않아 점수만 표시합니다."],saveErr:["未能保存（已取消或此处不支持）。","Could not save (cancelled or unsupported here).","저장하지 못했습니다(취소 또는 미지원)."],
+appT:["从网站到应用：分发路线","From website to app: distribution roadmap","웹사이트에서 앱으로: 배포 로드맵"],
+a1:["第一步 PWA：把本站做成可安装的网页应用，Android（含小米、华为浏览器）、iOS/iPadOS、Windows、macOS 都可“添加到主屏幕/安装”。","Step 1 – PWA: make the site installable; 'Add to Home Screen/Install' on Android (incl. Xiaomi and Huawei browsers), iOS/iPadOS, Windows and macOS.","1단계 PWA: 설치 가능한 웹앱으로 만들어 Android(샤오미·화웨이 브라우저 포함), iOS/iPadOS, Windows, macOS에서 홈 화면 추가/설치."],
+a2:["第二步：用 Capacitor 或 TWA 打包 Android 安装包，上架 Google Play、小米应用商店与华为应用市场（避免依赖仅 Google 的服务）。","Step 2 – Package Android with Capacitor/TWA for Google Play, Xiaomi GetApps and Huawei AppGallery (avoid Google-only services).","2단계: Capacitor/TWA로 Android를 패키징해 Google Play, 샤오미 GetApps, 화웨이 AppGallery에 배포(구글 전용 서비스 회피)."],
+a3:["第三步：同一套代码用 Capacitor 打包 iOS/iPadOS，上架 App Store。","Step 3 – Package iOS/iPadOS from the same code for the App Store.","3단계: 동일한 코드로 iOS/iPadOS를 패키징해 App Store에 배포."],
+a4:["第四步：新款华为 HarmonyOS NEXT 设备不再运行安卓安装包，需另做 HarmonyOS 原生版本（请以华为最新政策为准）。","Step 4 – Newer Huawei HarmonyOS NEXT devices no longer run Android APKs, so a native HarmonyOS build is needed (check Huawei's latest policy).","4단계: 최신 화웨이 HarmonyOS NEXT는 안드로이드 APK를 실행하지 않아 별도의 HarmonyOS 네이티브 빌드가 필요합니다(최신 정책 확인)."],
+a5:["第五步：电脑端用 PWA，或用 Electron/Tauri 打包。","Step 5 – Desktop: PWA, or package with Electron/Tauri.","5단계: 데스크톱은 PWA 또는 Electron/Tauri로 패키징."],
+appNote:["若作为医疗产品销售，需遵守各国医疗器械法规（如中国 NMPA、美国 FDA、韩国 MFDS）和儿童数据保护法；课程展示阶段保持“教育/科普”定位。","If sold as a medical product, follow device regulations (e.g. NMPA, FDA, MFDS) and children's data-protection laws; keep an education positioning for the course demo.","의료제품으로 판매하려면 의료기기 규제(NMPA, FDA, MFDS 등)와 아동 개인정보 보호법을 준수해야 하며, 수업 발표 단계에서는 교육용 정체성을 유지하세요."]
+};
+const $=id=>document.getElementById(id);
+let L=1;
+try{const s=localStorage.getItem('lang');if(s!==null)L=+s;else{const n=navigator.language||'';L=n.startsWith('ko')?2:n.startsWith('zh')?0:1}}catch(e){}
+const t=k=>S[k][L];
+const F={name:'fName',goal:'fGoal',theme:'fTheme',side:'fSide',diff:'fDiff',size:'fSize',time:'fTime'};
+function apply(){
+ document.documentElement.lang=['zh','en','ko'][L];$('lang').value=L;
+ document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
+ if(!$('fName').dataset.u&&!$('fName').value)$('fName').placeholder=['我的第一个游戏','My first game','나의 첫 게임'][L];
+ if($('plan').style.display!=='none')gen();
+}
+function show(id){
+ document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===id));
+ document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===id));
+ if(id!=='play')stopCam();window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>show(b.dataset.tab));
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go));
+$('lang').onchange=e=>{L=+e.target.value;try{localStorage.setItem('lang',L)}catch(x){}apply()};
+
+// ---- design
+function D(){return{name:$('fName').value.trim(),goal:+$('fGoal').value,theme:+$('fTheme').value,side:+$('fSide').value,diff:+$('fDiff').value,size:+$('fSize').value,time:+$('fTime').value,adapt:$('fAdapt').checked}}
+function sync(){$('vDiff').textContent=$('fDiff').value;$('vSize').textContent=$('fSize').value}
+function gen(){
+ const d=D();$('plan').style.display='block';
+ $('planName').textContent=(d.name||['我的第一个游戏','My first game','나의 첫 게임'][L])+' · '+[t('g1'),t('g2'),t('g3')][d.goal]+' · '+[t('th1'),t('th2'),t('th3')][d.theme]+' · '+[t('s1'),t('s2'),t('s3')][d.side];
+ $('planLine').textContent=t('pl').replace('{d}',d.diff).replace('{s}',d.size).replace('{t}',d.time).replace('{a}',d.adapt?t('yes'):t('no'));
+ $('planTip').textContent=t('tip'+d.goal);
+ try{localStorage.setItem('design',JSON.stringify(d))}catch(e){}
+}
+$('bGen').onclick=gen;
+['fDiff','fSize'].forEach(i=>$(i).oninput=sync);
+try{const s=JSON.parse(localStorage.getItem('design')||'null');if(s){$('fName').value=s.name||'';$('fGoal').value=s.goal;$('fTheme').value=s.theme;$('fSide').value=s.side;$('fDiff').value=s.diff;$('fSize').value=s.size;$('fTime').value=s.time;$('fAdapt').checked=!!s.adapt}else{$('fDiff').value=2;$('fSize').value=55;$('fTime').value=60;$('fAdapt').checked=true}}catch(e){$('fDiff').value=2;$('fSize').value=55;$('fTime').value=60}
+sync();
+
+// ---- camera + game
+const cv=$('cv'),cx=cv.getContext('2d'),vid=$('vid'),sm=document.createElement('canvas');sm.width=64;sm.height=48;
+const sx=sm.getContext('2d',{willReadFrequently:true});
+let stream=null,prev=null,mm=new Uint8Array(64*48),G=null,rec=null,chunks=[],blob=null,raf=0,pvUrl=null;
+async function startCam(){
+ try{
+  stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:640,height:480},audio:false});
+  vid.srcObject=stream;await vid.play();$('bPlay').disabled=false;$('camMsg').textContent='';prev=null;loop();
+ }catch(e){$('camMsg').textContent=t('camErr')}
+}
+function stopCam(){
+ if(G)endGame(true);cancelAnimationFrame(raf);
+ if(stream){stream.getTracks().forEach(x=>x.stop());stream=null}
+ $('bPlay').disabled=true;cx.clearRect(0,0,640,480);
+}
+$('bCam').onclick=()=>{if(!stream)startCam()};
+function motion(){
+ sx.setTransform(-1,0,0,1,64,0);sx.drawImage(vid,0,0,64,48);
+ const d=sx.getImageData(0,0,64,48).data,g=new Uint8Array(3072);
+ for(let i=0;i<3072;i++){const v=(d[i*4]*77+d[i*4+1]*150+d[i*4+2]*29)>>8;g[i]=v;mm[i]=prev&&Math.abs(v-prev[i])>28?1:0}
+ prev=g;
+}
+function hit(b){
+ const x0=Math.max(0,Math.floor((b.x-b.r)/10)),x1=Math.min(63,Math.floor((b.x+b.r)/10)),y0=Math.max(0,Math.floor((b.y-b.r)/10)),y1=Math.min(47,Math.floor((b.y+b.r)/10));
+ let n=0,m=0;for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){m++;n+=mm[y*64+x]}
+ return m>0&&n/m>0.22;
+}
+function spawn(){
+ const d=G.d,r=d.size*Math.pow(.93,G.lvl),lo=d.side===2?320+r:r,hi=d.side===1?320-r:640-r;
+ G.b.push({x:lo+Math.random()*(hi-lo),y:60+r+Math.random()*(480-120-2*r),r,t:performance.now()});
+}
+function life(){return Math.max(900,(6200-G.d.diff*950)*Math.pow(.88,G.lvl))}
+function outcome(ok){
+ ok?G.hits++:G.miss++;G.next=performance.now()+350;
+ if(G.d.adapt){G.h.push(ok?1:0);if(G.h.length>=5){const r=G.h.reduce((a,b)=>a+b)/5;if(r>=.8&&G.lvl<4)G.lvl++;else if(r<=.4&&G.lvl>-3)G.lvl--;G.h=[]}}
+}
+function loop(){
+ raf=requestAnimationFrame(loop);
+ if(!stream||vid.readyState<2)return;
+ cx.save();cx.translate(640,0);cx.scale(-1,1);cx.drawImage(vid,0,0,640,480);cx.restore();
+ motion();
+ if(!G)return;
+ const now=performance.now(),el=(now-G.start)/1000,E=['🎈','⭐','🍎'][G.d.theme];
+ if(el>=G.d.time){endGame(false);return}
+ while(G.b.length<2&&now>G.next)spawn();
+ for(const b of G.b.slice()){
+  if(now-b.t>400&&hit(b)){G.b.splice(G.b.indexOf(b),1);G.fx.push({x:b.x,y:b.y,t:now});outcome(true);continue}
+  const f=(now-b.t)/life();
+  if(f>=1){G.b.splice(G.b.indexOf(b),1);outcome(false);continue}
+  cx.beginPath();cx.arc(b.x,b.y,b.r,0,7);cx.fillStyle=['rgba(255,122,168,.45)','rgba(92,207,176,.45)','rgba(255,201,77,.5)'][G.d.theme];cx.fill();
+  cx.beginPath();cx.arc(b.x,b.y,b.r+4,-1.57,-1.57+6.28*(1-f));cx.strokeStyle='#ffd23f';cx.lineWidth=5;cx.stroke();
+  cx.font=(b.r*1.5)+'px serif';cx.textAlign='center';cx.textBaseline='middle';cx.fillStyle='#000';cx.fillText(E,b.x,b.y+2);
+ }
+ G.fx=G.fx.filter(f=>now-f.t<600);for(const f of G.fx){const k=(now-f.t)/600;cx.globalAlpha=1-k;cx.font=(30+50*k)+'px serif';cx.textAlign='center';cx.textBaseline='middle';cx.fillText('✨',f.x,f.y-20*k);cx.fillText('🎉',f.x+30*k,f.y-30*k)}cx.globalAlpha=1;
+ cx.fillStyle='rgba(90,50,140,.7)';cx.fillRect(0,0,640,40);cx.fillStyle='#fff';cx.font='20px system-ui,sans-serif';cx.textAlign='left';cx.textBaseline='middle';
+ cx.fillText('✔ '+G.hits+'   ✖ '+G.miss+'   Lv '+G.lvl,12,20);cx.textAlign='right';cx.fillText(t('tL')+' '+Math.ceil(G.d.time-el)+'s',628,20);
+}
+$('bPlay').onclick=()=>{
+ if(!stream||G)return;
+ const d=D();gen();
+ G={d,hits:0,miss:0,lvl:0,h:[],b:[],fx:[],next:0,start:performance.now()};
+ $('res').style.display='none';$('pv').style.display='none';$('bSave').style.display='none';blob=null;
+ if($('fRec').checked&&window.MediaRecorder){
+  try{
+   const mt=['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'].find(m=>MediaRecorder.isTypeSupported(m));
+   chunks=[];rec=new MediaRecorder(cv.captureStream(30),mt?{mimeType:mt}:undefined);
+   rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+   rec.onstop=()=>{if(!chunks.length)return;blob=new Blob(chunks,{type:'video/webm'});if(pvUrl)URL.revokeObjectURL(pvUrl);pvUrl=URL.createObjectURL(blob);$('pv').src=pvUrl;$('pv').style.display='block';$('bSave').style.display='inline-block';$('recMsg').textContent=''};
+   rec.start();
+  }catch(e){rec=null}
+ }else{rec=null}
+ $('bPlay').disabled=true;
+};
+function endGame(silent){
+ const g=G;G=null;
+ if(rec&&rec.state!=='inactive')rec.stop();
+ if(!stream)return;$('bPlay').disabled=false;
+ if(silent||!g)return;
+ const n=g.hits+g.miss;
+ $('rHit').textContent=g.hits;$('rMiss').textContent=g.miss;$('rAcc').textContent=(n?Math.round(100*g.hits/n):0)+'%';$('rLvl').textContent=g.lvl;
+ $('res').style.display='block';
+ $('recMsg').textContent=(!rec&&$('fRec').checked&&!window.MediaRecorder)?t('noRec'):'';
+ $('res').scrollIntoView({behavior:'smooth'});
+}
+$('bSave').onclick=async()=>{
+ if(!blob)return;
+ try{
+  const d=new Date(),p=n=>String(n).padStart(2,'0');
+  const fn='cp-session-'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'-'+p(d.getHours())+p(d.getMinutes())+'.webm';
+  const dl=(window.claude&&claude.use)?await claude.use('downloads'):null;
+  if(dl){await dl.save({filename:fn,data:blob})}
+  else{const a=document.createElement('a');a.href=pvUrl;a.download=fn;document.body.appendChild(a);a.click();a.remove()}
+  $('recMsg').textContent='';
+ }catch(e){$('recMsg').textContent=t('saveErr')}
+};
+
+apply();show('home');
+</script></body></html>
